@@ -1,0 +1,26 @@
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users ">
+        <td><a href="['/users', user.id]">{{ user.id }}</a></td>
+        <td>{{ user.firstName }}</td>
+        <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+        <button (click)="deleteUser(user.id)">Delete</button>
+        <button>
+          <a [routerLink]="['/users', user.id, 'edit']">Edit</a>
+        </button>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
