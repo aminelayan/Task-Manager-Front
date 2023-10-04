@@ -15,9 +15,11 @@ export class UserServiceService {
   constructor(private http:HttpClient) {
     this.url='http://localhost:8080/api/users'
   }
-  public findAll():Observable<User[]>{
-  return this.http.get<User[]>(this.url)
+  getAllUsers(searchTerm?: string): Observable<User[]> {
+    const url = `${this.url}?input=${searchTerm || ''}`;
+    return this.http.get<User[]>(url);
   }
+
 
   public userDeatails(userId:string):Observable<User>{
     const userurl=`${this.url}/${userId}`

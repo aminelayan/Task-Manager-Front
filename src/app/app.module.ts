@@ -18,8 +18,15 @@ import {MyHttpInterceptor} from "./http-interceptor";
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import {UsersComponent} from "./users/users.component";
 import { UserUpdateComponent } from './users/user-update/user-update.component';
-
-
+import {MatInputModule} from "@angular/material/input";
+import { TaskEditComponent } from './tasks/task-edit/task-edit.component';
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {MatIconModule} from "@angular/material/icon";
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {CommonModule, DatePipe} from "@angular/common";
 
 @NgModule({
   declarations:[
@@ -31,7 +38,8 @@ import { UserUpdateComponent } from './users/user-update/user-update.component';
     TaskCreateComponent,
     UserCreateComponent,
     UsersComponent,
-    UserUpdateComponent
+    UserUpdateComponent,
+    TaskEditComponent,
 
   ],
   imports: [
@@ -42,13 +50,22 @@ import { UserUpdateComponent } from './users/user-update/user-update.component';
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatFormFieldModule,
+    MatInputModule,
     MatChipsModule,
     HttpClientModule,
+    MatButtonToggleModule,
+    MatChipsModule,
+    MatIconModule,
+    MatSortModule,
+    MatTableModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    CommonModule
   ],
   exports:[],
   providers: [ {provide: HTTP_INTERCEPTORS,
   useClass: MyHttpInterceptor,
-  multi: true},],
+  multi: true},DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

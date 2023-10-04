@@ -7,10 +7,12 @@ import {TaskDetailsComponent} from "./tasks/task-details/task-details.component"
 import {TaskCreateComponent} from "./tasks/task-create/task-create.component";
 import {UserCreateComponent} from "./users/user-create/user-create.component";
 import {UserUpdateComponent} from "./users/user-update/user-update.component";
+import {TaskEditComponent} from "./tasks/task-edit/task-edit.component";
 
 
 const routes: Routes = [
   { path: 'tasks', component:TasksComponent},
+  { path: 'tasks/:id/edit', component:TaskEditComponent},
   { path: 'tasks/create', component: TaskCreateComponent },
   { path: 'tasks/:taskId', component:TaskDetailsComponent},
   { path: 'users', component: UsersComponent },

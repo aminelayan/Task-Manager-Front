@@ -19,9 +19,9 @@
         <td>{{ task.dueDate }}</td>
         <td>{{ task.completed ? 'Completed' : 'Not Completed' }}</td>
         <td class="usersTD">
-          <p class="usersP" *ngFor="let user of task.assignedUsers; let i = index">
-            {{i+1}}- {{ user.firstName }} ({{ user.email }})
-          </p>
+            <mat-chip *ngFor="let user of task.assignedUsers" class="assigned-chip">
+              {{ user.firstName }} ({{ user.email }})
+            </mat-chip>
         </td>
       </tr>
       </tbody>

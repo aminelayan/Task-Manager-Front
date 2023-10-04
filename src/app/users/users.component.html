@@ -1,5 +1,8 @@
 <div class="card my-5">
   <div class="card-body">
+    <div>
+      <input type="text" [(ngModel)]="searchTerm" (input)="search()" placeholder="Search"/>
+    </div>
     <table class="table table-bordered table-striped">
       <thead class="thead-dark">
       <tr>
@@ -11,14 +14,11 @@
       </thead>
       <tbody>
       <tr *ngFor="let user of users ">
-        <td><a href="['/users', user.id]">{{ user.id }}</a></td>
+        <td><a [routerLink]="['/users', user.id]">{{ user.id }}</a></td>
         <td>{{ user.firstName }}</td>
         <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
         <button (click)="deleteUser(user.id)">Delete</button>
-        <button>
-          <a [routerLink]="['/users', user.id, 'edit']">Edit</a>
-        </button>
-
+        <button [routerLink]="['/users', user.id, 'edit']">Edit</button>
       </tr>
       </tbody>
     </table>

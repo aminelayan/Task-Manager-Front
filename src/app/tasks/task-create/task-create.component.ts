@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Task} from "../../models/task/task";
 import {TaskService} from "../../Services/task/task.service";
 import {FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {User} from "../../models/user/user";
+import {UserServiceService} from "../../Services/user/user-service.service";
 
 
 @Component({
@@ -11,12 +13,14 @@ import {Router} from "@angular/router";
   templateUrl: './task-create.component.html',
   styleUrls: ['./task-create.component.css']
 })
-export class TaskCreateComponent {
+export class TaskCreateComponent implements OnInit{
   taskForm: FormGroup;
+  users:User[]=[]
 
   constructor(
     private formBuilder: FormBuilder,
     private taskService:TaskService,
+    private userService:UserServiceService,
     private route:Router
   ) {
     this.taskForm = this.formBuilder.group({
@@ -25,8 +29,11 @@ export class TaskCreateComponent {
       description: ['', Validators.required],
       completed: [false],
       dueDate: ['', [Validators.required, this.validateDate]],
+      assignedUsers: [[]]
     });
   }
+
+
 
   validateDate(control:any) {
     const selectedDate = new Date(control.value);
@@ -39,11 +46,11 @@ export class TaskCreateComponent {
     return null;
   }
 
+
   onSubmit(): void {
     if (this.taskForm.valid) {
       const formData = this.taskForm.value;
 
-      // Send an HTTP POST request using HttpClient
      this.taskService.createTask(formData).subscribe(
         (response) => {
           console.log('Task created:', response);
@@ -54,10 +61,22 @@ export class TaskCreateComponent {
           console.error('Error creating task:', error);
         }
       );
-    } else {
-      // Handle form validation errors here, if needed
     }
   }
+
+  ngOnInit(): void {
+    this.userService.getAllUsers().subscribe(
+      (users) => {
+        this.users = users;
+      },
+      (error) => {
+        console.error('Error fetching users:', error);
+      }
+    );
+  }
+
+
+
 
 }
 
